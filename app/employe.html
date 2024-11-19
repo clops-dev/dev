@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .back-button {
+            display: block;
+            height: 25px;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 25px;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<a href="index.html" class="back-button"><img src="../png/back.png" width="24" height="24"></a>
+
+<h1>Employee Management</h1>
+
+<form id="employeeForm">
+    <input type="text" id="cin" placeholder="CIN" required>
+    <input type="text" id="nom" placeholder="Name" required>
+    <input type="text" id="prenom" placeholder="First Name" required>
+    <input type="text" id="poste" placeholder="Position" required>
+    <input type="text" id="salaire" placeholder="Salary" required>
+    <input type="tel" id="numeroTel" placeholder="Phone Number" required>
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Add Employee</button>
+</form>
+
+<table id="employeeTable">
+    <thead>
+        <tr>
+            <th>CIN</th>
+            <th>Name</th>
+            <th>First Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Phone Number</th>
+            <th>E-mail</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    document.getElementById('employeeForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const cin = document.getElementById('cin').value;
+        const nom = document.getElementById('nom').value;
+        const prenom = document.getElementById('prenom').value;
+        const poste = document.getElementById('poste').value;
+        const salaire = document.getElementById('salaire').value;
+        const numeroTel = document.getElementById('numeroTel').value;
+        const email = document.getElementById('email').value;
+
+        const table = document.getElementById('employeeTable').getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+            <td>${cin}</td>
+            <td>${nom}</td>
+            <td>${prenom}</td>
+            <td>${poste}</td>
+            <td>${salaire}</td>
+            <td>${numeroTel}</td>
+            <td>${email}</td>
+            <td><button onclick="deleteRow(this)">Delete</button></td>
+        `;
+
+        this.reset();
+    });
+
+    function deleteRow(button) {
+        const row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+
+</body>
+</html>

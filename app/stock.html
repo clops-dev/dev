@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Stocks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 20%;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button {
+            display: block;
+            height: 25px;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 25px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button"><img src="../png/back.png" width="24" height="24"></a>
+    <h1>Gestion des Stocks</h1>
+
+    <div class="form-container">
+        <input type="text" id="id" placeholder="ID">
+        <input type="text" id="nom" placeholder="Nom du produit">
+        <input type="text" id="type" placeholder="Type">
+        <input type="number" id="quantite" placeholder="Quantité">
+        <input type="date" id="dateAjout" placeholder="Date d'ajout">
+        <input type="number" id="seuil" placeholder="Seuil (max)">
+        <button onclick="ajouterEquipement()">Ajouter Équipement</button>
+    </div>
+
+    <table id="tableStocks">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom du produit</th>
+                <th>Type</th>
+                <th>Quantité</th>
+                <th>Date d'ajout</th>
+                <th>Seuil (max)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function ajouterEquipement() {
+            const id = document.getElementById('id').value;
+            const nom = document.getElementById('nom').value;
+            const type = document.getElementById('type').value;
+            const quantite = document.getElementById('quantite').value;
+            const dateAjout = document.getElementById('dateAjout').value;
+            const seuil = document.getElementById('seuil').value;
+
+            const table = document.getElementById('tableStocks').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.insertCell(0).innerText = id;
+            newRow.insertCell(1).innerText = nom;
+            newRow.insertCell(2).innerText = type;
+            newRow.insertCell(3).innerText = quantite;
+            newRow.insertCell(4).innerText = dateAjout;
+            newRow.insertCell(5).innerText = seuil;
+            const deleteCell = newRow.insertCell(6);
+            const deleteButton = document.createElement('button');
+            deleteButton.innerText = 'Supprimer';
+            deleteButton.onclick = function() {
+                table.deleteRow(newRow.rowIndex - 1);
+            };
+            deleteCell.appendChild(deleteButton);
+
+            document.getElementById('id').value = '';
+            document.getElementById('nom').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('quantite').value = '';
+            document.getElementById('dateAjout').value = '';
+            document.getElementById('seuil').value = '';
+        }
+    </script>
+
+</body>
+</html>

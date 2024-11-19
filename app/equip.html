@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de l’équipement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-container {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="text"], input[type="date"] {
+            padding: 10px;
+            margin: 5px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button {
+            display: block;
+            height: 25px;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 25px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button"><img src="../png/back.png" width="24" height="24"></a>
+
+    <h1>Gestion de l’équipement</h1>
+
+    <div class="form-container">
+        <input type="text" id="identifiant" placeholder="Identifiant">
+        <input type="text" id="nom" placeholder="Nom">
+        <input type="text" id="type" placeholder="Type">
+        <input type="text" id="numero_serie" placeholder="Numéro de série">
+        <input type="date" id="date_achat" placeholder="Date d'achats">
+        <input type="text" id="etat" placeholder="État de l'équipement">
+        <input type="text" id="maintenance" placeholder="Maintenance">
+        <button onclick="ajouterEquipement()">Ajouter un nouvel équipement</button>
+    </div>
+
+    <table id="table-equipements">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Numéro de série</th>
+                <th>Date d'achats</th>
+                <th>État de l'équipement</th>
+                <th>Maintenance</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function ajouterEquipement() {
+            const identifiant = document.getElementById('identifiant').value;
+            const nom = document.getElementById('nom').value;
+            const type = document.getElementById('type').value;
+            const numero_serie = document.getElementById('numero_serie').value;
+            const date_achat = document.getElementById('date_achat').value;
+            const etat = document.getElementById('etat').value;
+            const maintenance = document.getElementById('maintenance').value;
+
+            const table = document.getElementById('table-equipements').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                <td>${identifiant}</td>
+                <td>${nom}</td>
+                <td>${type}</td>
+                <td>${numero_serie}</td>
+                <td>${date_achat}</td>
+                <td>${etat}</td>
+                <td>${maintenance}</td>
+                <td><button onclick="supprimerEquipement(this)">Supprimer</button></td>
+            `;
+
+            document.getElementById('identifiant').value = '';
+            document.getElementById('nom').value = '';
+            document.getElementById('type').value = '';
+            document.getElementById('numero_serie').value = '';
+            document.getElementById('date_achat').value = '';
+            document.getElementById('etat').value = '';
+            document.getElementById('maintenance').value = '';
+        }
+
+        function supprimerEquipement(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+
+</body>
+</html>

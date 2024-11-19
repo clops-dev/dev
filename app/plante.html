@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des plantations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .back-button {
+            display: block;
+            height: 25px;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 25px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button"><img src="../png/back.png" width="24" height="24"></a>
+
+<h1>Gestion des plantations</h1>
+
+<div class="form-container">
+    <h2>Ajouter une plantation</h2>
+    <input type="text" id="identifiant" placeholder="Identifiant">
+    <input type="text" id="nom" placeholder="Nom de la plantation">
+    <input type="text" id="superficie" placeholder="Superficie (ha)">
+    <input type="text" id="typeCulture" placeholder="Type de culture">
+    <input type="date" id="datePlantation">
+    <input type="text" id="etatSol" placeholder="État du sol">
+    <input type="number" id="quantite" placeholder="Quantité">
+    <input type="number" id="production" placeholder="Production (kg)">
+    <button class="btn" onclick="ajouterPlantation()">Ajouter</button>
+</div>
+
+<table id="tablePlantations">
+    <thead>
+        <tr>
+            <th>Identifiant</th>
+            <th>Nom de la plantation</th>
+            <th>Superficie</th>
+            <th>Type de culture</th>
+            <th>Date de plantation</th>
+            <th>État du sol</th>
+            <th>Quantité</th>
+            <th>Production</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    function ajouterPlantation() {
+        const identifiant = document.getElementById('identifiant').value;
+        const nom = document.getElementById('nom').value;
+        const superficie = document.getElementById('superficie').value;
+        const typeCulture = document.getElementById('typeCulture').value;
+        const datePlantation = document.getElementById('datePlantation').value;
+        const etatSol = document.getElementById('etatSol').value;
+        const quantite = document.getElementById('quantite').value;
+        const production = document.getElementById('production').value;
+
+        const table = document.getElementById('tablePlantations').getElementsByTagName('tbody')[0];
+        const newRow = table.insertRow();
+
+        newRow.innerHTML = `
+            <td>${identifiant}</td>
+            <td>${nom}</td>
+            <td>${superficie}</td>
+            <td>${typeCulture}</td>
+            <td>${datePlantation}</td>
+            <td>${etatSol}</td>
+            <td>${quantite}</td>
+            <td>${production}</td>
+            <td><button class="btn" onclick="supprimerPlantation(this)">Supprimer</button></td>
+        `;
+
+        document.getElementById('identifiant').value = '';
+        document.getElementById('nom').value = '';
+        document.getElementById('superficie').value = '';
+        document.getElementById('typeCulture').value = '';
+        document.getElementById('datePlantation').value = '';
+        document.getElementById('etatSol').value = '';
+        document.getElementById('quantite').value = '';
+        document.getElementById('production').value = '';
+    }
+
+    function supprimerPlantation(button) {
+        const row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+
+</body>
+</html>
